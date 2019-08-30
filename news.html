@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+    
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700%7CRoboto+Condensed:400,700&amp;subset=cyrillic" rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/favicon.ico" />
+  	<title>Pivarium</title>
+  	<style>
+        #loader-wrapper {position: fixed;left: 0;top: -100px;right: 0;bottom: -100px;background: #35231f;z-index: 12;}
+        .loaderTxt {position: absolute;top:50%;left: 50%;color: #fff;font-size: 18px;font-style: italic;padding-top: 125px; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);}
+        .loader {position: absolute;left: 50%;top: 50%;width: 48.2842712474619px;height: 48.2842712474619px;margin-left: -24.14213562373095px;margin-top: -24.14213562373095px;border-radius: 100%;-webkit-animation-name: loader;animation-name: loader;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-timing-function: linear;animation-timing-function: linear;-webkit-animation-duration: 4s;animation-duration: 4s;}
+        .loader .side {display: block;width: 6px;height: 20px;background-color: #f1a91d;margin: 2px;position: absolute;border-radius: 50%;-webkit-animation-duration: 1.5s;animation-duration: 1.5s;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-timing-function: ease;animation-timing-function: ease;}
+        .loader .side:nth-child(1),
+        .loader .side:nth-child(5) {-webkit-transform: rotate(0deg);transform: rotate(0deg);-webkit-animation-name: rotate0;animation-name: rotate0;}
+        .loader .side:nth-child(3),
+        .loader .side:nth-child(7) {-webkit-transform: rotate(90deg);transform: rotate(90deg);-webkit-animation-name: rotate90;animation-name: rotate90;}
+        .loader .side:nth-child(2),
+        .loader .side:nth-child(6) {-webkit-transform: rotate(45deg);transform: rotate(45deg);-webkit-animation-name: rotate45;animation-name: rotate45;}
+        .loader .side:nth-child(4),
+        .loader .side:nth-child(8) {-webkit-transform: rotate(135deg);transform: rotate(135deg);-webkit-animation-name: rotate135; animation-name: rotate135;}
+        .loader .side:nth-child(1) {top: 24.14213562373095px;left: 48.2842712474619px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(2) {top: 41.21320343109277px;left: 41.21320343109277px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(3) {top: 48.2842712474619px;left: 24.14213562373095px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(4) {top: 41.21320343109277px;left: 7.07106781636913px;margin-left: -3px;margin-top: -10px; -webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(5) {top: 24.14213562373095px;left: 0px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(6) {top: 7.07106781636913px;left: 7.07106781636913px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(7) {top: 0px;left: 24.14213562373095px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        .loader .side:nth-child(8) {top: 7.07106781636913px;left: 41.21320343109277px;margin-left: -3px;margin-top: -10px;-webkit-animation-delay: 0;animation-delay: 0;}
+        @-webkit-keyframes rotate0 {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}60% {-webkit-transform: rotate(180deg);transform: rotate(180deg);}100% {-webkit-transform: rotate(180deg);transform: rotate(180deg);}}
+        @keyframes rotate0 {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}60% {-webkit-transform: rotate(180deg);transform: rotate(180deg);}100% {-webkit-transform: rotate(180deg);transform: rotate(180deg);}}
+        @-webkit-keyframes rotate90 {0% {-webkit-transform: rotate(90deg);transform: rotate(90deg);}60% {-webkit-transform: rotate(270deg);transform: rotate(270deg);}100% {-webkit-transform: rotate(270deg);transform: rotate(270deg);}}
+        @keyframes rotate90 {0% {-webkit-transform: rotate(90deg);transform: rotate(90deg);}60% {-webkit-transform: rotate(270deg);transform: rotate(270deg);}100% {-webkit-transform: rotate(270deg);transform: rotate(270deg);}}
+        @-webkit-keyframes rotate45 {0% {-webkit-transform: rotate(45deg);transform: rotate(45deg);}60% {-webkit-transform: rotate(225deg);transform: rotate(225deg);}100% {-webkit-transform: rotate(225deg);transform: rotate(225deg);}}
+        @keyframes rotate45 {0% {-webkit-transform: rotate(45deg);transform: rotate(45deg);}60% {-webkit-transform: rotate(225deg);transform: rotate(225deg);}100% {-webkit-transform: rotate(225deg);transform: rotate(225deg);}}
+        @-webkit-keyframes rotate135 {0% {-webkit-transform: rotate(135deg);transform: rotate(135deg);}60% {-webkit-transform: rotate(315deg);transform: rotate(315deg);}100% {-webkit-transform: rotate(315deg);transform: rotate(315deg);}}
+        @keyframes rotate135 {0% {-webkit-transform: rotate(135deg);transform: rotate(135deg);}60% {-webkit-transform: rotate(315deg);transform: rotate(315deg);}100% {-webkit-transform: rotate(315deg);transform: rotate(315deg);}}
+        @-webkit-keyframes loader {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
+        @keyframes loader {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
+    </style>
+</head>
+<body>
+
+    <!--     Loader-Start     -->
+    <div id="loader-wrapper">
+        <div class="loader">
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+        </div>
+        <div class="loaderTxt">Завантаження...</div>
+    </div>
+    <!--     Loader-End     -->
+     
+    <div id="content-block">
+    
+        <!--     Header-Start    -->
+        <header>
+            <div class="bgImage" style="background-image: url(img/header-bg.jpg)">
+               <div class="headerContainer">
+                    <div class="orderWrapper">
+                        <div class="order">
+                            <a href="tel:+0443915286"><span>тел.: </span> 044 391-52-86</a>
+                            <p>Інформація / бронювання / доставка</p>
+                        </div>
+                        <div class="noLine">
+                            <div class="button btnHover btnSize6 btnStyle2 open-popup" data-rel="1">забронювати столик</div>
+                        </div>
+                    </div>
+                    <a class="mainLogo" href="index.html"><img class="imgShortcode" src="img/main-logo.png" alt=""></a>
+                    <div class="menuIcon"> 
+                        <span></span> 
+                        <span></span> 
+                        <span></span> 
+                        <span></span> 
+                    </div>
+                    <div class="mobileMenuWrapper">
+                        <nav>
+                            <ul class="leftMenu menuHover">
+                                <li class="dropDownParent"><a href="index.html">про ресторан</a>
+                                    <div class="mobileDropDowm">
+                                        <i class="fa fa-caret-down mobileDropIcon"></i>
+                                    </div>
+                                    <div class="dropDownWrapper">
+                                        <ul class="DropDownMenu">
+                                            <li><a href="about.html">історія</a></li>
+											<li><a href="collaboration.html">співпраця</a></li>
+											<li><a href="vacancies.html">вакансія</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="menu.html">меню</a></li>
+                                <li class="activeMenu"><a href="news.html">новини</a></li>
+                                <li><a href="promo.html">акції</a></li>
+                            </ul>
+                            <ul class="rightMenu menuHover">
+                                <li><a href="delivery.html">доставка</a></li>
+                                <li><a href="events.html">події</a></li>
+                                <li><a href="bonus.html">бонуси</a></li>
+                                <li><a href="contacts.html">контакти</a></li>
+                            </ul>
+                        </nav>
+                        <div class="basketWrapper">
+                            <div class="basket small open-popup" data-rel="2">
+                                <p>корзина:</p>
+                                <div class="basketIcon">
+                                    <img src="img/basket-icon.png" alt="">
+                                    <div class="basketcounter">5</div>
+                                </div>
+                                <span class="counterPrice">350,00 грн.</span>
+                            </div>
+                            <!--     header social-Start     -->
+                            <div class="SocialWrapper">
+                                <a href="https://facebook.com" target="_blank" class="social"><i class="fa fa-facebook socialIcon"></i></a>
+                                <a href="https://instagram.com" target="_blank" class="social"><i class="fa fa-instagram socialIcon"></i></a>
+                                <a href="https://vk.com" target="_blank" class="social"><i class="fa fa-vk socialIcon"></i></a>
+                                <a href="https://youtube.com" target="_blank" class="social"><i class="fa fa-youtube-play socialIcon"></i></a>
+                            </div>
+                            <!--     header social-End     --> 
+                            
+                            <!--     switch language-Start     -->
+                            <div class="languageToggle">
+                                <span>укр</span>
+                                <i class="fa fa-caret-down langIcon"></i>
+                                <ul class="langDropDown">
+                                    <li><a href="index.html">End</a></li>
+                                </ul>
+                            </div>
+                            <!--     switch language-End     -->
+                        </div>
+                        <!--     responsive duplicate copy-Start    -->
+                        <div class="orderWrapper">
+                            <div class="order">
+                                <a href="tel:+0443915286"><span>тел.: </span> 044 391-52-86</a>
+                                <p>Інформація / бронювання / доставка</p>
+                            </div>
+                            <div class="noLine">
+                                <div class="button btnHover btnSize6 btnStyle2 open-popup" data-rel="1">забронювати столик</div>
+                            </div>
+                        </div>
+                        <!--     responsive duplicate copy-End    -->
+                    </div>
+                </div>
+            </div>
+             <!--     Scroll Menu-START     -->
+            <div class="scrollMenuWrapper normall" style="background-image: url(img/header-bg.jpg)">
+                <ul class="menuHover">
+                    <li class="dropDownParent"><a href="index.html">про ресторан</a>
+                        <div class="dropDownWrapper">
+                            <ul class="DropDownMenu">
+                                <li><a href="about.html">історія</a></li>
+								<li><a href="collaboration.html">співпраця</a></li>
+								<li><a href="vacancies.html">вакансія</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="menu.html">меню</a></li>
+                    <li class="activeMenu"><a href="news.html">новини</a></li>
+                    <li><a href="promo.html">акції</a></li>
+                    <li><a href="delivery.html">доставка</a></li>
+                    <li><a href="events.html">події</a></li>
+                    <li><a href="bonus.html">бонуси</a></li>
+                    <li><a href="contacts.html">контакти</a></li>
+                </ul>
+            </div>
+            <!--     Scroll Menu-END     -->
+        </header>
+        <!--     Header-End    -->
+        
+        <!--  Gift-START 	-->  
+		<div class="gift">
+			<div class="giftContent">
+				<a href="index">Подарунковий сертифікат</a>
+				<a href="index.html">подарунок</a>
+			</div>
+		</div>
+        <!--  Gift-END 	-->
+        
+        <!--  Fixed social-START 	-->
+        <div class="scrolledSocial">
+       		<div class="SocialWrapper">
+       			<div class="social socialShare">
+       				<img class="imgShortcode" src="img/share-social-icon.png" alt="">
+       				<div class="scrolledSocialBlock">
+					<a href="https://facebook.com" target="_blank" class="social"><i class="fa fa-facebook socialIcon"></i></a>
+					<a href="https://instagram.com" target="_blank" class="social"><i class="fa fa-instagram socialIcon"></i></a>
+					<a href="https://vk.com" `target="_blank" class="social"><i class="fa fa-vk socialIcon"></i></a>
+					<a href="https://youtube.com" target="_blank" class="social"><i class="fa fa-youtube-play socialIcon"></i></a>
+				</div>
+				</div>
+			</div>
+        </div>
+        <!--  Fixed social-START 	-->
+        
+        <div class="bgImage">
+            <div class="bg bgFixed" style="background-image: url(img/news-banner.jpg)">
+                <div class="bg-30"></div>
+                <div class="cell-view ch430">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <article class="titleShortcode titleBorder normall">
+                                    <h1 class="h1">наші новини</h1>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="bgFixed ourHistory" style="background-image: url(img/history-bg.jpg)">
+			<div class="container">
+                <div class="sumoWrapper">
+                    <select name="form" class="SelectBox">
+                        <option selected disabled>архів новин</option>
+                        <option>січень 2015</option>
+                        <option>лютий 2015</option>
+                        <option>березень 2015</option>
+                        <option>квітень 2015</option>
+                        <option>травень 2015</option>
+                        <option>червень 2015</option>
+                        <option>липень 2015</option>
+                        <option>серпень 2015</option>
+                        <option>вересень 2015</option>
+                        <option>жовтень 2015</option>
+                        <option>листопад 2015</option>
+                        <option>грудень 2015</option>
+                    </select>
+                </div>
+                <div class="emptySpace30 emptySpace-xs35"></div>
+				<div class="row newsClearFix">
+					<!--     News1-Start     -->
+					<div class="col-md-6">
+						<div class="newsWrapper tumb">
+						    <a href="news-detail.html">
+						        <span class="brTop">
+						            <span class="brRight">
+						                <span class="brBottom">
+						                    <span class="brLeft">
+						                        <img class="imgShortcode" src="img/news-img.jpg" alt="">
+						                    </span>
+						                </span>
+						            </span>
+						        </span>
+						    </a>
+						    <div class="newsContent small">
+                                <span>29 жовтня 2016 р.</span>
+                                <h5 class="h5 as"><a href="news-detail.html">Всесвітній день посмішки</a></h5>
+                                <p>Це свято існує, завдяки художнику Харві Беллу (Harvey Ball). У 1963 році до нього звернулися представники страхової компанії «State Mutual Life Assurance Company of America» з проханням придумати якийсь яскравий</p>
+                            </div>
+						</div>
+						<div class="emptySpace50 emptySpace-xs35"></div>	
+					</div>
+					<!--     News1-End     -->
+					
+					<!--     News2-Start     -->
+					<div class="col-md-6">
+						<div class="newsWrapper tumb">
+						    <a href="news-detail.html">
+						        <span class="brTop">
+						            <span class="brRight">
+						                <span class="brBottom">
+						                    <span class="brLeft">
+						                        <img class="imgShortcode" src="img/news-img2.jpg" alt="">
+						                    </span>
+						                </span>
+						            </span>
+						        </span>
+						    </a>
+						    <div class="newsContent small">
+                                <span>14 листопада 2016 р.</span>
+                                <h5 class="h5 as"><a href="news-detail.html">п’ятниця 13-те - вечірка без забобонів!</a></h5>
+                                <p>Гарно погуляли минулого тижня... бодіарт, дівчата топлес, музика, танці - є, що згадати! А цієї суботи чекаємо вас на пінно-пивній вечірці на честь Пивного Чемпіонату!</p>
+                            </div>
+						</div>
+						<div class="emptySpace50 emptySpace-xs35"></div>		
+					</div>
+					<!--     News2-End     -->
+					
+					<!--     News3-Start     -->
+					<div class="col-md-6">
+						<div class="newsWrapper tumb">
+						    <a href="news-detail.html">
+						        <span class="brTop">
+						            <span class="brRight">
+						                <span class="brBottom">
+						                    <span class="brLeft">
+						                        <img class="imgShortcode" src="img/news-img3.jpg" alt="">
+						                    </span>
+						                </span>
+						            </span>
+						        </span>
+						    </a>
+						    <div class="newsContent small">
+                                <span>27 вересня 2016 р.</span>
+                                <h5 class="h5 as"><a href="news-detail.html">День козацтва - 2016</a></h5>
+                                <p>Свято Покрови здавна шанується українцями. Для козаків воно було особливим, так як саме в цей день вибирався новий гетьман. Ми всі нащадки славних козаків, сильних духом і веселих вдачею.</p>
+                            </div>
+						</div>
+						<div class="emptySpace50 emptySpace-xs35"></div>		
+					</div>
+					<!--     News3-End     -->
+					
+					<!--     News4-Start     -->
+					<div class="col-md-6">
+						<div class="newsWrapper tumb">
+						    <a href="news-detail.html">
+						        <span class="brTop">
+						            <span class="brRight">
+						                <span class="brBottom">
+						                    <span class="brLeft">
+						                        <img class="imgShortcode" src="img/news-img4.jpg" alt="">
+						                    </span>
+						                </span>
+						            </span>
+						        </span>
+						    </a>
+						    <div class="newsContent small">
+                                <span>14 вересня 2016 р.</span>
+                                <h5 class="h5 as"><a href="news-detail.html">Oktoberfest в Пиваріум</a></h5>
+                                <p>З 17 по 30 вересня відзначаємо найочікуванішу пивну подію - Oktoberfest! У нас буде весело, драйвово і хмільно! Камон Еврібаді до нас!</p>
+                            </div>
+						</div>	
+					</div>
+					<!--     News4-End     -->
+				</div>
+				<div class="emptySpace50"></div>
+				<div class="pagePagiWrapper small">
+				    <a class="pagePagination prevPagi" href="news.html"> </a>
+				    <a class="pagePagination activePagi" href="news.html"><span>1</span></a>
+				    <a class="pagePagination" href="news.html"><span>2</span></a>
+				    <a class="pagePagination" href="news.html"><span>3</span></a>
+				    <a class="pagePagination" href="news.html"><span>4</span></a>
+				    <a class="pagePagination nextPagi" href="news.html"> </a>
+				</div>
+			</div>
+		</div>
+
+        <!--     Footer Start    -->
+        <footer>
+            <div class="bgImage">
+                <div class="bgFixed footer" style="background-image: url(img/footer-bg.jpg)">
+                    <div class="container">
+                        <div class="footerTopInfo">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="footerLogo small">
+                                        <a href="index.html">
+                                            <img class="imgShortcode" src="img/main-logo.png" alt="">
+                                        </a>
+                                        <p>Відпочиваючи в ресторані «Пивариум» Ви п'єте пиво, яке вариться спеціально для Вас в пивоварні, розташованої прямо перед Вами, за барною стійкою. Наше пиво дійсно «живе», що не фільтроване і не пастеризоване!</p>
+                                    </div>
+                                </div>
+                                <div class="emptySpace-md30"></div>
+                                <div class="col-md-4">
+                                    <div class="footerContacts">
+                                        <h6 class="h7">Контакти</h6>
+                                        <p>тел.:</p>
+                                        <a href="tel:0443915286">044 391-52-86</a>
+                                        <a href="tel:0443915299">044 391-52-99</a>
+                                        <p>email</p>
+                                        <a href="mailto:0443915286">info@pivarium.com.ua</a>
+                                        <p>адрес.:</p>
+                                        <a href="#">пр-т Победы, 31 (м. Политехнический институт) 2-й этаж</a>
+                                        <p>ми в соцмережах:</p>
+                                        <div class="SocialWrapper">
+                                             <a href="https://facebook.com" target="_blank" class="social"><i class="fa fa-facebook socialIcon"></i></a>
+                                            <a href="https://instagram.com" target="_blank" class="social"><i class="fa fa-instagram socialIcon"></i></a>
+                                            <a href="https://vk.com" target="_blank" class="social"><i class="fa fa-vk socialIcon"></i></a>
+                                            <a href="https://youtube.com" target="_blank" class="social"><i class="fa fa-youtube-play socialIcon"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="emptySpace-md30"></div>
+                                <div class="col-md-4">
+                                    <div class="footerFeedback">
+                                        <h6 class="h7">зворотній зв’язок</h6>
+                                        <form>
+                                            <input class="simple-input" type="text" value="" placeholder="ваше ім’я" />
+                                            <input class="simple-input" type="email" value="" placeholder="ваш email" />
+                                            <textarea class="simple-input" placeholder="повідомлення"></textarea>
+                                            <div class="noLine">
+                                                <button class="button btnHover" type="submit">надіслати</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subscribe">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6 class="h7">підписати на розсилку новин від пиваріума</h6>
+                                    <form>
+                                        <input class="simple-input" type="email" value="" placeholder="Введіть ваш email" />
+                                        <div class="noLine">
+                                            <button class="button btnHover" type="submit">підписатись</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="menuHover">
+                            <li><a href="index.html">про ресторан</a></li>
+                            <li><a href="menu.html">меню</a></li>
+                            <li><a href="news.html">новини</a></li>
+                            <li><a href="promo.html">акції</a></li>
+                            <li><a href="delivery.html">доставка</a></li>
+                            <li><a href="events.html">події</a></li>
+                            <li><a href="bonus.html">бонуси</a></li>
+                            <li><a href="contacts.html">контакти</a></li>
+                        </ul>
+                        <div class="footerBottomInfo">
+                            <span>©2016 всі права застережено. Пиваріум.</span>
+                            <a href="http://redstone.media" target="_blank">розробка сайту веб-студія <span>redstone</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--     Footer End    -->
+
+    </div>
+
+    <!--    Popup Start     -->
+    <div class="popup-wrapper">
+        <div class="bg-layer"></div>
+
+        <div class="popup-content" data-rel="1">
+            <div class="layer-close"></div>
+            <div class="popup-container size-1">
+                <div class="popupBorder">
+                    <div class="popupContent">
+                        <h3 class="h3">зарезервувати столик</h3>
+                        <div class="emptySpace35"></div>
+                        <form>
+                            <input class="simple-input" type="text" value="" required placeholder="ваше ім’я *" />
+                            <div class="emptySpace5"></div>
+                            <input class="simple-input" type="text" value="" required placeholder="Ваш телефон *" />
+                            <div class="emptySpace5"></div>
+                            <input class="simple-input" type="email" value="" placeholder="Ваш e-mail" />
+                            <div class="emptySpace5"></div>
+                            <input class="simple-input TimeOder" type="text" value="" placeholder="дата бронювання" />
+                            <input class="simple-input TimeOder" type="text" value="" placeholder="час бронювання" />
+                            <div class="emptySpace5"></div>
+                            <textarea class="simple-input" placeholder="примітки"></textarea>
+                            <div class="emptySpace50 emptySpace-xs25"></div>
+                            <div class="twoLine">
+                                <button class="button btnHover btnSize5" type="submit">замовити</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="button-close"> <span></span><span></span></div>
+            </div>
+        </div>
+        
+        <div class="popup-content" data-rel="2">
+            <div class="layer-close"></div>
+            <div class="popup-container size-1">
+                <div class="popupBorder">
+                    <div class="popupContent">
+                        <h3 class="h3">Ваша Корзина</h3>
+                        <div class="emptySpace35"></div>
+                    </div>
+                </div>
+                <div class="button-close"> <span></span><span></span></div>
+            </div>
+        </div>
+    </div>
+    <!--    Popup End     -->
+    
+    <!--    Stles Start    -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/swiper.css" rel="stylesheet" type="text/css" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/sumoselect.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <!--    Stles End    -->
+    
+    <!--    Scripts Start     -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="js/swiper.jquery.min.js"></script>
+    <script src="js/jquery.sumoselect.min.js"></script>
+    <script src="js/SmoothScroll.js"></script>
+    <script src="js/global.js"></script>
+    <!--    Scripts End     -->
+</body>
+</html>
